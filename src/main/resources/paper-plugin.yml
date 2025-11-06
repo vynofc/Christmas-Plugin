@@ -1,0 +1,89 @@
+name: ChristmasPlugin
+version: '1.0-SNAPSHOT'
+main: xyz.niliees.christmasPlugin.ChristmasPlugin
+api-version: '1.21'
+prefix: NSCE
+authors: [ niliees ]
+website: https://nsce.fr
+load: POSTWORLD
+depend: []
+softdepend: [Vault, WorldGuard]
+
+
+permissions:
+  christmasplus.*:
+    description: Gives access to all Christmas plugin features
+    default: op
+    children:
+      christmasplus.adventcalendar: true
+      christmasplus.adventcalendar.reset: true
+      christmasplus.adventcalendar.test: true
+      christmasplus.christmas: true
+      christmasplus.christmas.snow: true
+      christmasplus.christmas.santa: true
+      christmasplus.christmas.reload: true
+      christmasplus.cracker: true
+      christmasplus.cracker.list: true
+      christmasplus.cracker.give: true
+      christmasplus.cracker.get: true
+      christmasplus.cracker.get.multiple: true
+
+  christmasplus.adventcalendar:
+    description: Access to advent calendar
+    default: true
+
+  christmasplus.adventcalendar.reset:
+    description: Reset advent calendar days for players
+    default: op
+
+  christmasplus.adventcalendar.test:
+    description: Toggle test mode for advent calendar
+    default: op
+
+  christmasplus.christmas:
+    description: Access to christmas command
+    default: true
+
+  christmasplus.christmas.snow:
+    description: Toggle snow effect
+    default: true
+
+  christmasplus.christmas.santa:
+    description: Manage Santa Claus event
+    default: op
+
+  christmasplus.christmas.reload:
+    description: Reload plugin configuration
+    default: op
+
+  christmasplus.cracker:
+    description: Access to cracker commands
+    default: true
+
+  christmasplus.cracker.list:
+    description: List available crackers
+    default: true
+
+  christmasplus.cracker.give:
+    description: Give crackers to other players
+    default: op
+
+  christmasplus.cracker.get:
+    description: Get crackers for yourself
+    default: op
+
+  christmasplus.cracker.get.multiple:
+    description: Get multiple crackers at once
+    default: op
+
+  christmasplus.group.vip:
+    description: VIP gift group
+    default: false
+
+  christmasplus.group.premium:
+    description: Premium gift group
+    default: false
+
+  christmasplus.group.donor:
+    description: Donor gift group
+    default: false

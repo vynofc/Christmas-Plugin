@@ -1,0 +1,283 @@
+# Advent Calendar Gifts Configuration
+# Define gifts for each day of the advent calendar
+
+# Format:
+# day-X:
+#   groups:
+#     group-name:
+#       items:
+#         - type: ITEM/COMMAND/PERMISSION
+#           (item-specific properties)
+
+# Days 1-25
+day-1:
+  groups:
+    default:
+      items:
+        - type: "ITEM"
+          material: "DIAMOND"
+          amount: 1
+          name: "&b&lDay 1 Diamond"
+          lore:
+            - "&7A special gift for day 1!"
+    vip:
+      items:
+        - type: "ITEM"
+          material: "DIAMOND"
+          amount: 3
+          name: "&b&lDay 1 VIP Diamond"
+          lore:
+            - "&7A special VIP gift!"
+        - type: "COMMAND"
+          command: "give {player} emerald 5"
+
+day-2:
+  groups:
+    default:
+      items:
+        - type: "ITEM"
+          material: "GOLDEN_APPLE"
+          amount: 2
+
+day-3:
+  groups:
+    default:
+      items:
+        - type: "ITEM"
+          material: "ENCHANTED_GOLDEN_APPLE"
+          amount: 1
+
+day-4:
+  groups:
+    default:
+      items:
+        - type: "COMMAND"
+          command: "give {player} netherite_scrap 1"
+
+day-5:
+  groups:
+    default:
+      items:
+        - type: "ITEM"
+          material: "DIAMOND_SWORD"
+          amount: 1
+          enchantments:
+            - "SHARPNESS:3"
+            - "UNBREAKING:2"
+
+day-6:
+  groups:
+    default:
+      items:
+        - type: "ITEM"
+          material: "EMERALD"
+          amount: 10
+
+day-7:
+  groups:
+    default:
+      items:
+        - type: "ITEM"
+          material: "ENCHANTED_BOOK"
+          amount: 1
+          stored-enchantments:
+            - "MENDING:1"
+
+day-8:
+  groups:
+    default:
+      items:
+        - type: "ITEM"
+          material: "TOTEM_OF_UNDYING"
+          amount: 1
+
+day-9:
+  groups:
+    default:
+      items:
+        - type: "ITEM"
+          material: "ELYTRA"
+          amount: 1
+
+day-10:
+  groups:
+    default:
+      items:
+        - type: "ITEM"
+          material: "DIAMOND_BLOCK"
+          amount: 5
+
+day-11:
+  groups:
+    default:
+      items:
+        - type: "ITEM"
+          material: "NETHERITE_INGOT"
+          amount: 1
+
+day-12:
+  groups:
+    default:
+      items:
+        - type: "COMMAND"
+          command: "give {player} diamond 10"
+
+day-13:
+  groups:
+    default:
+      items:
+        - type: "ITEM"
+          material: "ENCHANTED_BOOK"
+          amount: 1
+          stored-enchantments:
+            - "FORTUNE:3"
+
+day-14:
+  groups:
+    default:
+      items:
+        - type: "ITEM"
+          material: "DIAMOND_PICKAXE"
+          amount: 1
+          enchantments:
+            - "EFFICIENCY:5"
+            - "UNBREAKING:3"
+
+day-15:
+  groups:
+    default:
+      items:
+        - type: "ITEM"
+          material: "BEACON"
+          amount: 1
+
+day-16:
+  groups:
+    default:
+      items:
+        - type: "ITEM"
+          material: "NETHER_STAR"
+          amount: 3
+
+day-17:
+  groups:
+    default:
+      items:
+        - type: "ITEM"
+          material: "ENCHANTED_GOLDEN_APPLE"
+          amount: 5
+
+day-18:
+  groups:
+    default:
+      items:
+        - type: "ITEM"
+          material: "DIAMOND_CHESTPLATE"
+          amount: 1
+          enchantments:
+            - "PROTECTION:4"
+            - "UNBREAKING:3"
+
+day-19:
+  groups:
+    default:
+      items:
+        - type: "ITEM"
+          material: "TRIDENT"
+          amount: 1
+          enchantments:
+            - "LOYALTY:3"
+
+day-20:
+  groups:
+    default:
+      items:
+        - type: "ITEM"
+          material: "SHULKER_BOX"
+          amount: 1
+
+day-21:
+  groups:
+    default:
+      items:
+        - type: "ITEM"
+          material: "NETHERITE_INGOT"
+          amount: 3
+
+day-22:
+  groups:
+    default:
+      items:
+        - type: "ITEM"
+          material: "ENCHANTED_BOOK"
+          amount: 1
+          stored-enchantments:
+            - "SHARPNESS:5"
+
+day-23:
+  groups:
+    default:
+      items:
+        - type: "ITEM"
+          material: "DRAGON_HEAD"
+          amount: 1
+
+day-24:
+  groups:
+    default:
+      items:
+        - type: "ITEM"
+          material: "NETHERITE_SWORD"
+          amount: 1
+          enchantments:
+            - "SHARPNESS:5"
+            - "LOOTING:3"
+            - "UNBREAKING:3"
+        - type: "COMMAND"
+          command: "give {player} emerald_block 10"
+
+day-25:
+  groups:
+    default:
+      items:
+        - type: "ITEM"
+          material: "NETHERITE_CHESTPLATE"
+          amount: 1
+          enchantments:
+            - "PROTECTION:4"
+            - "UNBREAKING:3"
+            - "MENDING:1"
+        - type: "ITEM"
+          material: "NETHERITE_HELMET"
+          amount: 1
+          enchantments:
+            - "PROTECTION:4"
+            - "UNBREAKING:3"
+        - type: "ITEM"
+          material: "NETHERITE_LEGGINGS"
+          amount: 1
+          enchantments:
+            - "PROTECTION:4"
+            - "UNBREAKING:3"
+        - type: "ITEM"
+          material: "NETHERITE_BOOTS"
+          amount: 1
+          enchantments:
+            - "PROTECTION:4"
+            - "UNBREAKING:3"
+        - type: "COMMAND"
+          command: "give {player} diamond_block 32"
+    vip:
+      items:
+        - type: "ITEM"
+          material: "NETHERITE_CHESTPLATE"
+          amount: 1
+          enchantments:
+            - "PROTECTION:4"
+            - "UNBREAKING:3"
+            - "MENDING:1"
+            - "THORNS:3"
+        - type: "PERMISSION"
+          permission: "christmasplus.christmas.vip"
+          duration: -1
+

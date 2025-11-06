@@ -1,0 +1,157 @@
+# Christmas Plugin Configuration
+# By niliees - https://nsce.fr
+
+# General Settings
+general:
+  prefix: "&c&l[Christmas] &r"
+  language: "en"
+
+# Advent Calendar Settings
+advent-calendar:
+  enabled: true
+  # Allow claiming gifts from previous days
+  allow-previous-days: true
+  # Start date (month-day format)
+  start-date: "12-01"
+  # End date
+  end-date: "12-25"
+  # GUI Settings
+  gui:
+    title: "&c&lAdvent Calendar"
+    size: 54 # Must be multiple of 9 (9, 18, 27, 36, 45, 54)
+    fill-empty-slots: true
+    fill-material: "RED_STAINED_GLASS_PANE"
+    # Day item settings
+    day-item:
+      available: "GREEN_WOOL"
+      claimed: "YELLOW_WOOL"
+      locked: "RED_WOOL"
+
+# Santa Claus Event Settings
+santa-claus:
+  enabled: true
+  # Default duration in seconds
+  default-duration: 600
+  # Entity settings
+  entity-type: "VILLAGER"
+  name: "&c&lSanta Claus &f&l🎅"
+  show-name-tag: true
+  # Skin settings (for player NPCs if using Citizens or similar)
+  skin:
+    enabled: false
+    texture: ""
+    signature: ""
+  # Movement settings
+  speed: 0.3
+  can-fly: false
+  # Gift drop settings
+  gift-drop:
+    enabled: true
+    chance: 15.0 # Percentage (0-100)
+    interval: 5 # Seconds between drop attempts
+  # Snow trail settings
+  snow-trail:
+    enabled: true
+    fade-delay: 100 # Ticks (20 ticks = 1 second)
+    particle-amount: 10
+  # Spawn locations (for random spawn)
+  spawn-locations:
+    - world: "world"
+      x: 0
+      y: 64
+      z: 0
+    - world: "world"
+      x: 100
+      y: 64
+      z: 100
+  # Allow spawning in WorldGuard protected regions
+  ignore-worldguard: true
+
+# Christmas Crackers Settings
+crackers:
+  enabled: true
+  # Define different cracker types
+  types:
+    basic:
+      name: "&e&lBasic Cracker"
+      material: "PAPER"
+      custom-model-data: 0
+      lore:
+        - "&7Right-click to open!"
+        - "&7You might get a surprise!"
+      glow: true
+      rewards:
+        - type: "ITEM"
+          item: "DIAMOND"
+          amount: 1
+          chance: 50.0
+        - type: "COMMAND"
+          command: "give {player} emerald 5"
+          chance: 30.0
+        - type: "PERMISSION"
+          permission: "christmasplus.vip"
+          duration: 3600 # seconds, -1 for permanent
+          chance: 20.0
+    premium:
+      name: "&6&lPremium Cracker"
+      material: "PAPER"
+      custom-model-data: 1
+      lore:
+        - "&7Right-click to open!"
+        - "&6Premium rewards inside!"
+      glow: true
+      rewards:
+        - type: "ITEM"
+          item: "DIAMOND"
+          amount: 5
+          chance: 40.0
+        - type: "COMMAND"
+          command: "give {player} netherite_ingot 1"
+          chance: 35.0
+        - type: "PERMISSION"
+          permission: "christmasplus.premium"
+          duration: -1
+          chance: 25.0
+
+# Snow Effect Settings
+snow-effect:
+  enabled: true
+  # Default intensity level (1-5)
+  default-intensity: 3
+  # Particle settings per intensity level
+  levels:
+    1:
+      particles-per-tick: 1
+      radius: 10
+    2:
+      particles-per-tick: 3
+      radius: 15
+    3:
+      particles-per-tick: 5
+      radius: 20
+    4:
+      particles-per-tick: 8
+      radius: 25
+    5:
+      particles-per-tick: 12
+      radius: 30
+  # World blacklist
+  disabled-worlds:
+    - "world_nether"
+    - "world_the_end"
+
+# Gift Groups (for advent calendar)
+# Players with higher priority groups will receive those gifts
+gift-groups:
+  default:
+    priority: 0
+  vip:
+    priority: 1
+    permission: "christmasplus.group.vip"
+  premium:
+    priority: 2
+    permission: "christmasplus.group.premium"
+  donor:
+    priority: 3
+    permission: "christmasplus.group.donor"
+
