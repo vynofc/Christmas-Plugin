@@ -9,7 +9,7 @@
 
 Ein umfangreiches Weihnachts-Plugin für Minecraft Paper Server mit Adventskalender, Santa Claus Events, Christmas Crackers und vielem mehr!
 
-**Entwickelt von [niliees](https://nsce.fr) | © 2024 NSCE**
+**Entwickelt von [niliees](https://nsce.fr) | © 2025 NSCE**
 
 </div>
 
@@ -601,4 +601,5 @@ Bei Fragen zur Lizenz: support@nsce.fr
 🎄 Frohe Weihnachten! 🎅
 
 </div>
+
 
