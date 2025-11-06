@@ -54,44 +54,71 @@ public class CrackerManager {
         boolean glow = section.getBoolean("glow", false);
 
         List<CrackerReward> rewards = new ArrayList<>();
-        ConfigurationSection rewardsSection = section.getConfigurationSection("rewards");
 
-        if (rewardsSection != null) {
-            for (String rewardKey : rewardsSection.getKeys(false)) {
-                ConfigurationSection rewardSection = rewardsSection.getConfigurationSection(rewardKey);
-                if (rewardSection != null) {
-                    CrackerReward reward = loadReward(rewardSection);
+        // Rewards is a list in the config, not a map
+        if (section.contains("rewards")) {
+            Object rewardsObj = section.get("rewards");
+            if (rewardsObj instanceof List) {
+                @SuppressWarnings("unchecked")
+                List<Map<?, ?>> rewardsList = (List<Map<?, ?>>) rewardsObj;
+                for (Map<?, ?> rewardMap : rewardsList) {
+                    CrackerReward reward = loadRewardFromMap(rewardMap);
                     if (reward != null) {
                         rewards.add(reward);
+                        plugin.getLogger().info("  Loaded reward: " + reward.type + " - " +
+                            (reward.item != null ? reward.item : reward.command != null ? reward.command : "unknown"));
                     }
                 }
             }
         }
 
+        plugin.getLogger().info("Loaded cracker '" + id + "' with " + rewards.size() + " rewards");
+
         return new CrackerType(id, name, material, customModelData, lore, glow, rewards);
     }
 
-    private CrackerReward loadReward(ConfigurationSection section) {
-        String type = section.getString("type", "ITEM");
-        double chance = section.getDouble("chance", 100.0);
+    private CrackerReward loadRewardFromMap(Map<?, ?> map) {
+        try {
+            String type = (String) map.get("type");
+            if (type == null) {
+                plugin.getLogger().warning("Reward missing 'type' field");
+                return null;
+            }
 
-        CrackerReward reward = new CrackerReward(type, chance);
+            CrackerReward reward = new CrackerReward(type, 100.0);
 
-        switch (type.toUpperCase()) {
-            case "ITEM":
-                reward.item = section.getString("item");
-                reward.amount = section.getInt("amount", 1);
-                break;
-            case "COMMAND":
-                reward.command = section.getString("command");
-                break;
-            case "PERMISSION":
-                reward.permission = section.getString("permission");
-                reward.duration = section.getInt("duration", -1);
-                break;
+            switch (type.toUpperCase()) {
+                case "ITEM":
+                    reward.item = (String) map.get("item");
+                    Object amountObj = map.get("amount");
+                    reward.amount = amountObj != null ? ((Number) amountObj).intValue() : 1;
+
+                    if (reward.item == null) {
+                        plugin.getLogger().warning("ITEM reward missing 'item' field");
+                        return null;
+                    }
+                    break;
+
+                case "COMMAND":
+                    reward.command = (String) map.get("command");
+                    if (reward.command == null) {
+                        plugin.getLogger().warning("COMMAND reward missing 'command' field");
+                        return null;
+                    }
+                    break;
+
+                case "PERMISSION":
+                    reward.permission = (String) map.get("permission");
+                    Object durationObj = map.get("duration");
+                    reward.duration = durationObj != null ? ((Number) durationObj).intValue() : -1;
+                    break;
+            }
+
+            return reward;
+        } catch (Exception e) {
+            plugin.getLogger().warning("Error loading reward: " + e.getMessage());
+            return null;
         }
-
-        return reward;
     }
 
     public ItemStack createCracker(String type) {
@@ -179,60 +206,54 @@ public class CrackerManager {
         placeholders.put("cracker", plugin.getMessageManager().colorize(cracker.name));
         plugin.getMessageManager().sendMessage(player, "crackers.opened", placeholders);
 
-        // Select a reward based on chance
-        CrackerReward reward = selectReward(cracker.rewards);
-
-        if (reward != null) {
-            giveReward(player, reward);
-        }
-    }
-
-    private CrackerReward selectReward(List<CrackerReward> rewards) {
-        if (rewards.isEmpty()) {
-            return null;
-        }
-
-        // Normalize chances
-        double totalChance = rewards.stream().mapToDouble(r -> r.chance).sum();
-        double random = Math.random() * totalChance;
-
-        double cumulative = 0;
-        for (CrackerReward reward : rewards) {
-            cumulative += reward.chance;
-            if (random <= cumulative) {
-                return reward;
+        // Give ALL rewards (no probability - players always get everything)
+        int itemCount = 0;
+        for (CrackerReward reward : cracker.rewards) {
+            // Skip permission rewards - only give items and commands
+            if (reward.type.equalsIgnoreCase("PERMISSION")) {
+                plugin.getLogger().info("Skipping permission reward in cracker (permissions not supported)");
+                continue;
             }
+
+            giveReward(player, reward);
+            itemCount++;
         }
 
-        return rewards.get(rewards.size() - 1);
+        plugin.getLogger().info("Player " + player.getName() + " opened " + type + " cracker and received " + itemCount + " rewards");
     }
+
+
 
     private void giveReward(Player player, CrackerReward reward) {
         Map<String, String> placeholders = new HashMap<>();
 
         switch (reward.type.toUpperCase()) {
             case "ITEM":
-                Material material = Material.valueOf(reward.item.toUpperCase());
-                ItemStack item = new ItemStack(material, reward.amount);
-                player.getInventory().addItem(item);
+                try {
+                    Material material = Material.valueOf(reward.item.toUpperCase());
+                    ItemStack item = new ItemStack(material, reward.amount);
+                    HashMap<Integer, ItemStack> leftover = player.getInventory().addItem(item);
 
-                placeholders.put("item", material.name());
-                placeholders.put("amount", String.valueOf(reward.amount));
-                plugin.getMessageManager().sendMessage(player, "crackers.received-item", placeholders);
+                    // Drop items that don't fit in inventory
+                    if (!leftover.isEmpty()) {
+                        for (ItemStack drop : leftover.values()) {
+                            player.getWorld().dropItemNaturally(player.getLocation(), drop);
+                        }
+                        plugin.getLogger().info("Dropped items on ground for player " + player.getName() + " (inventory full)");
+                    }
+
+                    placeholders.put("item", material.name());
+                    placeholders.put("amount", String.valueOf(reward.amount));
+                    plugin.getMessageManager().sendMessage(player, "crackers.received-item", placeholders);
+                } catch (IllegalArgumentException e) {
+                    plugin.getLogger().warning("Invalid material in cracker reward: " + reward.item);
+                }
                 break;
 
             case "COMMAND":
                 String command = reward.command.replace("{player}", player.getName());
                 plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(), command);
                 plugin.getMessageManager().sendMessage(player, "crackers.received-command-reward");
-                break;
-
-            case "PERMISSION":
-                if (plugin.isVaultEnabled() && plugin.getPermission() != null) {
-                    plugin.getPermission().playerAdd(player, reward.permission);
-                    placeholders.put("permission", reward.permission);
-                    plugin.getMessageManager().sendMessage(player, "crackers.received-permission", placeholders);
-                }
                 break;
         }
     }

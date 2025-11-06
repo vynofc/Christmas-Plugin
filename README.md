@@ -52,10 +52,11 @@ Ein umfangreiches Weihnachts-Plugin für Minecraft Paper Server mit Adventskalen
 
 ### 🎁 Christmas Crackers
 - ✅ **Eigene Cracker-Typen** definieren
-- ✅ **Gewichtetes Belohnungssystem** (Chance-basiert)
-- ✅ **Verschiedene Rewards**: Items, Commands, Permissions
+- ✅ **Alle Items garantiert** - Spieler erhalten ALLE konfigurierten Items
+- ✅ **Verschiedene Rewards**: Items und Commands
 - ✅ **Glow-Effekt** und Custom Model Data Support
 - ✅ **Einfaches Verschenken** an andere Spieler
+- ✅ **Automatisches Droppen** wenn Inventar voll ist
 
 ### ❄️ Schneefall-Effekt
 - ✅ **5 Intensitätsstufen** (von sanft bis Schneesturm)
@@ -276,12 +277,16 @@ crackers:
       name: "&e&lBasic Cracker"   # Anzeigename
       material: "PAPER"           # Item-Material
       glow: true                  # Glow-Effekt?
-      rewards:                    # Mögliche Belohnungen
+      rewards:                    # Alle Belohnungen (Spieler bekommt ALLES)
         - type: "ITEM"
           item: "DIAMOND"
           amount: 1
-          chance: 50.0            # 50% Chance
+        - type: "ITEM"
+          item: "EMERALD"
+          amount: 3
 ```
+
+**Hinweis:** Spieler erhalten **ALLE** konfigurierten Items beim Öffnen eines Crackers, keine Wahrscheinlichkeiten!
 
 #### Schneeeffekt
 ```yaml
@@ -351,10 +356,16 @@ day-1:
           duration: 3600         # Sekunden (-1 = permanent)
 ```
 
-**Gift-Typen:**
+**Gift-Typen (Adventskalender):**
 - `ITEM` - Items mit Enchantments, Lore, etc.
 - `COMMAND` - Führt Command aus (z.B. für andere Plugins)
 - `PERMISSION` - Gibt temporäre oder permanente Permission (benötigt Vault)
+
+**Reward-Typen (Christmas Crackers):**
+- `ITEM` - Items (Spieler erhält ALLE konfigurierten Items)
+- `COMMAND` - Führt Command aus
+
+**Hinweis:** Crackers unterstützen keine Permission-Belohnungen. Verwende stattdessen Commands oder den Adventskalender.
 
 ---
 

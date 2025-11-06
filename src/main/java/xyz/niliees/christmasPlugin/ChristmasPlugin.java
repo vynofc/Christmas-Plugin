@@ -1,8 +1,6 @@
 package xyz.niliees.christmasPlugin;
 
-import net.milkbowl.vault.permission.Permission;
 import org.bukkit.Bukkit;
-import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import xyz.niliees.christmasPlugin.commands.AdventCalendarCommand;
 import xyz.niliees.christmasPlugin.commands.ChristmasCommand;
@@ -31,8 +29,8 @@ public final class ChristmasPlugin extends JavaPlugin {
     private SnowEffectManager snowEffectManager;
     private GiftManager giftManager;
 
-    // Vault
-    private Permission permission;
+    // Vault (stored as Object to avoid ClassNotFoundException if Vault is not installed)
+    private Object vaultPermission;
     private boolean vaultEnabled = false;
 
     // WorldGuard
@@ -108,14 +106,24 @@ public final class ChristmasPlugin extends JavaPlugin {
 
     private void setupVault() {
         if (getServer().getPluginManager().getPlugin("Vault") != null) {
-            RegisteredServiceProvider<Permission> rsp = getServer().getServicesManager().getRegistration(Permission.class);
-            if (rsp != null) {
-                permission = rsp.getProvider();
-                vaultEnabled = true;
-                getLogger().info("✓ Vault hooked successfully!");
+            try {
+                // Use reflection to avoid ClassNotFoundException when Vault is not present
+                Class<?> permissionClass = Class.forName("net.milkbowl.vault.permission.Permission");
+                Object rsp = getServer().getServicesManager().getRegistration(permissionClass);
+                if (rsp != null) {
+                    // Get the provider using reflection
+                    vaultPermission = rsp.getClass().getMethod("getProvider").invoke(rsp);
+                    vaultEnabled = true;
+                    getLogger().info("✓ Vault hooked successfully!");
+                } else {
+                    getLogger().warning("✗ Vault found but no Permission provider registered!");
+                }
+            } catch (Exception e) {
+                getLogger().warning("✗ Error hooking into Vault: " + e.getMessage());
+                vaultEnabled = false;
             }
         } else {
-            getLogger().warning("✗ Vault not found! Some features may not work correctly.");
+            getLogger().info("✗ Vault not found - will work without it.");
         }
     }
 
@@ -262,8 +270,8 @@ public final class ChristmasPlugin extends JavaPlugin {
         return giftManager;
     }
 
-    public Permission getPermission() {
-        return permission;
+    public Object getVaultPermission() {
+        return vaultPermission;
     }
 
     public boolean isVaultEnabled() {

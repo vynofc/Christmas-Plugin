@@ -192,18 +192,22 @@ public class GiftManager {
     }
 
     public void giveGifts(Player player, List<Gift> gifts) {
-        MessageManager messageManager = plugin.getMessageManager();
+        plugin.getLogger().info("Giving " + gifts.size() + " gifts to player " + player.getName());
 
         for (Gift gift : gifts) {
+            plugin.getLogger().info("Processing gift of type: " + gift.getType());
             switch (gift.getType()) {
                 case ITEM:
                     if (gift.getItemStack() != null) {
+                        plugin.getLogger().info("Giving item: " + gift.getItemStack().getType() + " x" + gift.getItemStack().getAmount());
                         HashMap<Integer, ItemStack> leftover = player.getInventory().addItem(gift.getItemStack());
                         if (!leftover.isEmpty()) {
                             for (ItemStack item : leftover.values()) {
                                 player.getWorld().dropItemNaturally(player.getLocation(), item);
                             }
                         }
+                    } else {
+                        plugin.getLogger().warning("Gift ItemStack is null!");
                     }
                     break;
 
@@ -215,10 +219,15 @@ public class GiftManager {
                     break;
 
                 case PERMISSION:
-                    if (gift.getPermission() != null && plugin.isVaultEnabled() && plugin.getPermission() != null) {
-                        // If duration is -1, it's permanent
-                        // Otherwise, you'd need a timed permissions plugin or custom implementation
-                        plugin.getPermission().playerAdd(player, gift.getPermission());
+                    if (gift.getPermission() != null && plugin.isVaultEnabled() && plugin.getVaultPermission() != null) {
+                        try {
+                            // Use reflection to call Vault's playerAdd method
+                            Object vaultPerm = plugin.getVaultPermission();
+                            vaultPerm.getClass().getMethod("playerAdd", org.bukkit.entity.Player.class, String.class)
+                                    .invoke(vaultPerm, player, gift.getPermission());
+                        } catch (Exception e) {
+                            plugin.getLogger().warning("Failed to add permission via Vault: " + e.getMessage());
+                        }
                     }
                     break;
             }

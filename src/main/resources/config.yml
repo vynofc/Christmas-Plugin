@@ -78,20 +78,17 @@ crackers:
       custom-model-data: 0
       lore:
         - "&7Right-click to open!"
-        - "&7You might get a surprise!"
+        - "&7You will receive all items inside!"
       glow: true
       rewards:
         - type: "ITEM"
           item: "DIAMOND"
           amount: 1
-          chance: 50.0
+        - type: "ITEM"
+          item: "EMERALD"
+          amount: 3
         - type: "COMMAND"
-          command: "give {player} emerald 5"
-          chance: 30.0
-        - type: "PERMISSION"
-          permission: "christmasplus.vip"
-          duration: 3600 # seconds, -1 for permanent
-          chance: 20.0
+          command: "give {player} golden_apple 2"
     premium:
       name: "&6&lPremium Cracker"
       material: "PAPER"
@@ -99,19 +96,20 @@ crackers:
       lore:
         - "&7Right-click to open!"
         - "&6Premium rewards inside!"
+        - "&7You will receive all items!"
       glow: true
       rewards:
         - type: "ITEM"
           item: "DIAMOND"
           amount: 5
-          chance: 40.0
+        - type: "ITEM"
+          item: "NETHERITE_SCRAP"
+          amount: 2
+        - type: "ITEM"
+          item: "ENCHANTED_GOLDEN_APPLE"
+          amount: 1
         - type: "COMMAND"
           command: "give {player} netherite_ingot 1"
-          chance: 35.0
-        - type: "PERMISSION"
-          permission: "christmasplus.premium"
-          duration: -1
-          chance: 25.0
 
 # Snow Effect Settings
 snow-effect:

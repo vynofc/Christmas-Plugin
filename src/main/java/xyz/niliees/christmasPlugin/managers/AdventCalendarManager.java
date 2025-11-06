@@ -248,12 +248,16 @@ public class AdventCalendarManager {
     }
 
     public void claimDay(Player player, int day) {
+        plugin.getLogger().info("Player " + player.getName() + " attempting to claim day " + day);
+
         if (!canClaimDay(player, day)) {
+            plugin.getLogger().info("Player cannot claim day " + day + " (already claimed or not available)");
             return;
         }
 
         // Get gifts for this day
         List<Gift> gifts = plugin.getGiftManager().getGiftsForDay(day, player);
+        plugin.getLogger().info("Found " + gifts.size() + " gifts for day " + day);
 
         if (gifts.isEmpty()) {
             plugin.getLogger().warning("No gifts configured for day " + day);
