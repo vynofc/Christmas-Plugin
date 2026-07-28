@@ -1,20 +1,20 @@
-package xyz.niliees.christmasPlugin;
+package fun.vynofc.christmasPlugin;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
-import xyz.niliees.christmasPlugin.commands.AdventCalendarCommand;
-import xyz.niliees.christmasPlugin.commands.ChristmasCommand;
-import xyz.niliees.christmasPlugin.commands.CrackerCommand;
-import xyz.niliees.christmasPlugin.config.ConfigManager;
-import xyz.niliees.christmasPlugin.listeners.AdventCalendarListener;
-import xyz.niliees.christmasPlugin.listeners.CrackerListener;
-import xyz.niliees.christmasPlugin.listeners.SantaListener;
-import xyz.niliees.christmasPlugin.managers.AdventCalendarManager;
-import xyz.niliees.christmasPlugin.managers.CrackerManager;
-import xyz.niliees.christmasPlugin.managers.GiftManager;
-import xyz.niliees.christmasPlugin.managers.MessageManager;
-import xyz.niliees.christmasPlugin.managers.SantaManager;
-import xyz.niliees.christmasPlugin.managers.SnowEffectManager;
+import fun.vynofc.christmasPlugin.commands.AdventCalendarCommand;
+import fun.vynofc.christmasPlugin.commands.ChristmasCommand;
+import fun.vynofc.christmasPlugin.commands.CrackerCommand;
+import fun.vynofc.christmasPlugin.config.ConfigManager;
+import fun.vynofc.christmasPlugin.listeners.AdventCalendarListener;
+import fun.vynofc.christmasPlugin.listeners.CrackerListener;
+import fun.vynofc.christmasPlugin.listeners.SantaListener;
+import fun.vynofc.christmasPlugin.managers.AdventCalendarManager;
+import fun.vynofc.christmasPlugin.managers.CrackerManager;
+import fun.vynofc.christmasPlugin.managers.GiftManager;
+import fun.vynofc.christmasPlugin.managers.MessageManager;
+import fun.vynofc.christmasPlugin.managers.SantaManager;
+import fun.vynofc.christmasPlugin.managers.SnowEffectManager;
 
 public final class ChristmasPlugin extends JavaPlugin {
 

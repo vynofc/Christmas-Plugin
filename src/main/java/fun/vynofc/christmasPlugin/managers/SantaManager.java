@@ -1,4 +1,4 @@
-package xyz.niliees.christmasPlugin.managers;
+package fun.vynofc.christmasPlugin.managers;
 
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
-import xyz.niliees.christmasPlugin.ChristmasPlugin;
+import fun.vynofc.christmasPlugin.ChristmasPlugin;
 
 import java.util.*;
 

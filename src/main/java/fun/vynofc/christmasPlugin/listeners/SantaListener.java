@@ -1,10 +1,10 @@
-package xyz.niliees.christmasPlugin.listeners;
+package fun.vynofc.christmasPlugin.listeners;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
-import xyz.niliees.christmasPlugin.ChristmasPlugin;
+import fun.vynofc.christmasPlugin.ChristmasPlugin;
 
 public class SantaListener implements Listener {
 

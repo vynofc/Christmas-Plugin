@@ -1,4 +1,4 @@
-package xyz.niliees.christmasPlugin.models;
+package fun.vynofc.christmasPlugin.models;
 
 import org.bukkit.inventory.ItemStack;
 

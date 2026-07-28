@@ -1,4 +1,4 @@
-package xyz.niliees.christmasPlugin.listeners;
+package fun.vynofc.christmasPlugin.listeners;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -6,7 +6,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-import xyz.niliees.christmasPlugin.ChristmasPlugin;
+import fun.vynofc.christmasPlugin.ChristmasPlugin;
 
 public class CrackerListener implements Listener {
 

@@ -1,4 +1,4 @@
-package xyz.niliees.christmasPlugin.models;
+package fun.vynofc.christmasPlugin.models;
 
 public enum GiftType {
     ITEM,

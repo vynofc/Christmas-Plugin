@@ -1,4 +1,4 @@
-package xyz.niliees.christmasPlugin.commands;
+package fun.vynofc.christmasPlugin.commands;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -8,7 +8,7 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
-import xyz.niliees.christmasPlugin.ChristmasPlugin;
+import fun.vynofc.christmasPlugin.ChristmasPlugin;
 
 import java.util.*;
 

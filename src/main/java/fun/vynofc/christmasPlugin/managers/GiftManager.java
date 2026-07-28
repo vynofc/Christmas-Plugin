@@ -1,4 +1,4 @@
-package xyz.niliees.christmasPlugin.managers;
+package fun.vynofc.christmasPlugin.managers;
 
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
@@ -8,9 +8,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import xyz.niliees.christmasPlugin.ChristmasPlugin;
-import xyz.niliees.christmasPlugin.models.Gift;
-import xyz.niliees.christmasPlugin.models.GiftType;
+import fun.vynofc.christmasPlugin.ChristmasPlugin;
+import fun.vynofc.christmasPlugin.models.Gift;
+import fun.vynofc.christmasPlugin.models.GiftType;
 
 import java.util.*;
 import java.util.stream.Collectors;

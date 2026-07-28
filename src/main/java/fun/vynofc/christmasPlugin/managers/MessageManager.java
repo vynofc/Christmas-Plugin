@@ -1,4 +1,4 @@
-package xyz.niliees.christmasPlugin.managers;
+package fun.vynofc.christmasPlugin.managers;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -7,7 +7,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import xyz.niliees.christmasPlugin.ChristmasPlugin;
+import fun.vynofc.christmasPlugin.ChristmasPlugin;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,8 +1,8 @@
-package xyz.niliees.christmasPlugin.config;
+package fun.vynofc.christmasPlugin.config;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import xyz.niliees.christmasPlugin.ChristmasPlugin;
+import fun.vynofc.christmasPlugin.ChristmasPlugin;
 
 import java.io.File;
 import java.io.IOException;
