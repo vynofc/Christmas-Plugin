@@ -1,0 +1,27 @@
+name: release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          cache: maven
+          java-version: 25
+      - name: Build
+        run: mvn --batch-mode package
+      - name: Publish
+        uses: Kir-Antipov/mc-publish@v3.3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          files: target/*.jar
+          name: ${{ github.event.release.tag_name }}
+          version: ${{ github.event.release.tag_name }}
